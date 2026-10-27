@@ -1,5 +1,4 @@
 import fetch from "node-fetch";
-import {RouteAnnouncerProps as post} from ".cache/route-announcer-props.js";
 
 export async function sourceNodes({ actions, createNodeId, createContentDigest })
 {
@@ -25,9 +24,9 @@ export async function sourceNodes({ actions, createNodeId, createContentDigest }
     const postsResponse = await fetch("https://jsonplaceholder.typicode.com/posts")
     const posts = await postsResponse.json();
 
-    posts.forEach(posts => {
+    posts.forEach(post => {
         createNode({
-            ...posts,
+            ...post,
             id: createNodeId(`Post-${post.id}`),
             parent: null,
             children: [],
@@ -37,4 +36,4 @@ export async function sourceNodes({ actions, createNodeId, createContentDigest }
             }
         })
     })
-};
+}
